@@ -1,0 +1,12 @@
+info:
+  contact: {}
+  description: This is an API for booking Hotels.
+  title: Booking Hotel API
+  version: "2.0"
+paths: {}
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

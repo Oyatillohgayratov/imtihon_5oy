@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+option go_package = "./bookingpb";
+
+service BookingService {
+  rpc CreateBooking (CreateBookingRequest) returns (CreateBookingResponse);
+  rpc GetBookingDetails (GetBookingDetailsRequest) returns (GetBookingDetailsResponse);
+  rpc UpdateBooking (UpdateBookingRequest) returns (UpdateBookingResponse);
+  rpc CancelBooking (CancelBookingRequest) returns (CancelBookingResponse);
+  rpc ListUserBookings (ListUserBookingsRequest) returns (ListUserBookingsResponse);
+}
+
+message CreateBookingRequest {
+  string userID = 1;
+  string hotelID = 2;
+  string roomType = 3;
+  string checkInDate = 4;
+  string checkOutDate = 5;
+  double totalAmount = 6;
+}
+
+message CreateBookingResponse {
+  string bookingID = 1;
+  string userID = 2;
+  string hotelID = 3;
+  string roomType = 4;
+  string checkInDate = 5;
+  string checkOutDate = 6;
+  double totalAmount = 7;
+  string status = 8; // Example: Confirmed
+}
+
+message GetBookingDetailsRequest {
+  string bookingID = 1;
+}
+
+message GetBookingDetailsResponse {
+  string bookingID = 1;
+  string userID = 2;
+  string hotelID = 3;
+  string roomType = 4;
+  string checkInDate = 5;
+  string checkOutDate = 6;
+  double totalAmount = 7;
+  string status = 8; // Example: Confirmed, Cancelled
+}
+
+message UpdateBookingRequest {
+  string bookingID = 1;
+  string checkInDate = 2;
+  string checkOutDate = 3;
+  double totalAmount = 4;
+  string status = 5; // Example: Confirmed, Cancelled
+}
+
+message UpdateBookingResponse {
+  string bookingID = 1;
+  string userID = 2;
+  string hotelID = 3;
+  string roomType = 4;
+  string checkInDate = 5;
+  string checkOutDate = 6;
+  double totalAmount = 7;
+  string status = 8; // Example: Confirmed, Cancelled
+}
+
+message CancelBookingRequest {
+  string bookingID = 1;
+}
+
+message CancelBookingResponse {
+  string message = 1;
+  string bookingID = 2;
+}
+
+message ListUserBookingsRequest {
+  string userID = 1;
+}
+
+message ListUserBookingsResponse {
+  repeated Booking bookingList = 1;
+}
+
+message Booking {
+  string bookingID = 1;
+  string hotelID = 2;
+  string roomType = 3;
+  string checkInDate = 4;
+  string checkOutDate = 5;
+  double totalAmount = 6;
+  string status = 7; // Example: Confirmed, Cancelled
+}

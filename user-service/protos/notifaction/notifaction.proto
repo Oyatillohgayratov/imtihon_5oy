@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "./notifactionpb";
+
+service NotificationService {
+  rpc SendEmail (SendEmailRequest) returns (SendEmailResponse);
+  rpc NotifyWebSocket (NotifyWebSocketRequest) returns (NotifyWebSocketResponse);
+}
+
+message SendEmailRequest {
+  string to = 1;
+  string subject = 2;
+  string body = 3;
+}
+
+message SendEmailResponse {
+  string status = 1; // Example: Success
+}
+
+message NotifyWebSocketRequest {
+  string userID = 1;
+  string message = 2;
+}
+
+message NotifyWebSocketResponse {
+  string status = 1; // Example: Sent
+}

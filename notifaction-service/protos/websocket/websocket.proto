@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "./websocketpb";
+
+service WebSocketService {
+  rpc Subscribe (SubscribeRequest) returns (stream Message);
+  rpc Unsubscribe (UnsubscribeRequest) returns (UnsubscribeResponse);
+}
+
+message SubscribeRequest {
+  string userID = 1;
+}
+
+message UnsubscribeRequest {
+  string userID = 1;
+}
+
+message UnsubscribeResponse {
+  string status = 1; // Example: Success
+}
+
+message Message {
+  string userID = 1;
+  string content = 2;
+}

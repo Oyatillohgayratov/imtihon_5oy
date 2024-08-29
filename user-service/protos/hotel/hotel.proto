@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+option go_package = "./hotelpb";
+
+service HotelService {
+  rpc AddHotel(Hotel) returns (AddHotelResponse);
+  rpc GetHotels (GetHotelsRequest) returns (GetHotelsResponse);
+  rpc GetHotelDetails (GetHotelDetailsRequest) returns (GetHotelDetailsResponse);
+  rpc CheckRoomAvailability (CheckRoomAvailabilityRequest) returns (CheckRoomAvailabilityResponse);
+  rpc CheckHotelID (CheckHotelIDRequest) returns (CheckHotelIDResponse);
+  rpc UdateRoomAvailability (UdateRoomAvailabilityRequest) returns (UdateRoomAvailabilityResponse);
+}
+
+message UdateRoomAvailabilityRequest{
+  string hotelID = 1;
+  string roomType = 2;
+  bool NewValid = 3;
+}
+
+message UdateRoomAvailabilityResponse{
+  bool updated = 1;
+}
+
+message CheckHotelIDRequest {
+  string id = 1;
+}
+
+message CheckHotelIDResponse {
+  bool valid = 1;
+}
+
+message AddHotelResponse {
+  int32 hotelID = 1;
+}
+
+message GetHotelsRequest {}
+
+message GetHotelsResponse {
+  repeated Hotel hotels = 1;
+}
+
+message GetHotelDetailsRequest {
+  string hotelID = 1;
+}
+
+message GetHotelDetailsResponse {
+  Hotel hotel = 1;
+}
+
+message CheckRoomAvailabilityRequest {
+  string hotelID = 1;
+}
+
+message CheckRoomAvailabilityResponse {
+  repeated RoomAvailability roomAvailabilities = 1;
+}
+
+message Hotel {
+  string hotelID = 1;
+  string name = 2;
+  string location = 3;
+  double rating = 4;
+  string address = 5;
+  repeated Room rooms = 6;
+}
+
+message Room {
+  string roomType = 1;
+  double pricePerNight = 2;
+  bool availability = 3;
+}
+
+message RoomAvailability {
+  string roomType = 1;
+  int32 availableRooms = 2;
+}
